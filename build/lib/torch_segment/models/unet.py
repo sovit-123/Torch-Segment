@@ -33,7 +33,7 @@ def double_convolution(in_channels, out_channels):
     return conv_op
 
 class UNet(nn.Module):
-    def __init__(self, num_classes):
+    def __init__(self, n_classes):
         super(UNet, self).__init__()
 
         self.max_pool2d = nn.MaxPool2d(kernel_size=2, stride=2)
@@ -71,7 +71,7 @@ class UNet(nn.Module):
 
         # output => increase the `out_channels` as per the number of classes
         self.out = nn.Conv2d(
-            in_channels=64, out_channels=num_classes, 
+            in_channels=64, out_channels=n_classes, 
             kernel_size=1
         ) 
 

@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="torch-segment-sovit",
-    version="0.0.1",
+    name="torch-segment",
+    version="0.1",
     author="Sovit Ranjan Rath",
     author_email="sovitrath5@gmail.com",
     description="A library for deep learning image segmentation using PyTorch",
