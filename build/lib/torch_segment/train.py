@@ -1,6 +1,7 @@
 from .engine import Trainer
 from .dataset import get_data_loaders, get_dataset, get_images
 from .utils.helpers import visualize_from_dataloader, visualize_from_path
+from .utils.helpers import set_colors_list, set_all_classes
 
 import argparse
 import sys
@@ -23,10 +24,16 @@ def set_model(learning_params):
     model.to(learning_params['DEVICE'])
     return model
 
-def init_engine(learning_params, classes_to_train, 
+def init_engine(learning_params, classes_to_train, label_colors_list, all_classes,
                 user_train_image_transform=None, user_train_mask_transform=None, 
                 user_valid_image_transform=None, user_valid_mask_transform=None,
                 show_image=False):
+
+    # set the colors list for helpers.py first
+    set_colors_list(label_colors_list)
+
+    # set all classes for helpers.py
+    set_all_classes(all_classes)
 
     print(f"LEARNING PARAMS: {learning_params}")
     # get the data paths
@@ -37,12 +44,12 @@ def init_engine(learning_params, classes_to_train,
         user_train_mask_transform != None or
         user_valid_image_transform != None or
         user_valid_mask_transform != None):
-        train_dataset, valid_dataset = get_dataset(train_images, train_segs,
+        train_dataset, valid_dataset = get_dataset(train_images, train_segs, label_colors_list,
                                                 valid_images, valid_segs, classes_to_train,
                                                 user_train_image_transform, user_train_mask_transform, 
                                                 user_valid_image_transform, user_valid_mask_transform)
     else:
-        train_dataset, valid_dataset = get_dataset(train_images, train_segs,
+        train_dataset, valid_dataset = get_dataset(train_images, train_segs, label_colors_list,
                                                 valid_images, valid_segs, classes_to_train)
 
     # get data loaders

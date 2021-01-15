@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: torch-segment
-Version: 0.1
+Version: 0.0.2
 Summary: A library for deep learning image segmentation using PyTorch
 Home-page: https://github.com/sovit-123/Torch-Segment
 Author: Sovit Ranjan Rath

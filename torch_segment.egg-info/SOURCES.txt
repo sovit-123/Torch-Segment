@@ -13,6 +13,7 @@ torch_segment.egg-info/top_level.txt
 torch_segment/models/__init__.py
 torch_segment/models/fcn_resnet50.py
 torch_segment/models/unet.py
+torch_segment/models/unet11.py
 torch_segment/utils/__init__.py
 torch_segment/utils/helpers.py
 torch_segment/utils/metrics.py

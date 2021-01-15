@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 import torch
 
-from .utils.helpers import label_colors_list, get_label_mask
+from .utils.helpers import get_label_mask
 from .utils.helpers import set_class_values
 from torch.utils.data import Dataset, DataLoader
 from PIL import Image
@@ -63,7 +63,7 @@ class CamVidDataset(Dataset):
         return image, mask
 
 class Transforms():
-    def train_image_transforms():
+    def train_image_transforms(self):
         train_image_transform = albumentations.Compose([
             albumentations.Resize(224, 224, always_apply=True),
             albumentations.Normalize(
@@ -74,7 +74,7 @@ class Transforms():
         print(train_image_transform)
         return train_image_transform
 
-    def valid_image_transforms():
+    def valid_image_transforms(self):
         valid_image_transform = albumentations.Compose([
             albumentations.Resize(224, 224, always_apply=True),
             albumentations.Normalize(
@@ -84,26 +84,27 @@ class Transforms():
         ])
         return valid_image_transform
 
-    def train_target_transroms():
+    def train_target_transroms(self):
         train_mask_transform = albumentations.Compose([
             albumentations.Resize(224, 224, always_apply=True),
         ])
         return train_mask_transform
 
-    def valid_target_transforms():
+    def valid_target_transforms(self):
         valid_mask_transform = albumentations.Compose([
             albumentations.Resize(224, 224, always_apply=True),
         ])
         return valid_mask_transform
 
-
+transforms = Transforms()
         
-def get_dataset(train_images, train_segs, valid_images, 
+def get_dataset(train_images, train_segs, 
+                label_colors_list, valid_images, 
                 valid_segs, classes_to_train, 
-                user_train_image_transform=Transforms.train_image_transforms(), 
-                user_train_mask_transform=Transforms.train_target_transroms(), 
-                user_valid_image_transform=Transforms.valid_image_transforms(), 
-                user_valid_mask_transform=Transforms.valid_target_transforms()):
+                user_train_image_transform=transforms.train_image_transforms(), 
+                user_train_mask_transform=transforms.train_target_transroms(), 
+                user_valid_image_transform=transforms.valid_image_transforms(), 
+                user_valid_mask_transform=transforms.valid_target_transforms()):
     train_dataset = CamVidDataset(train_images, train_segs, user_train_image_transform, 
                                 user_train_mask_transform,
                                 label_colors_list, 
