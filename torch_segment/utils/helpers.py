@@ -169,7 +169,6 @@ def draw_translucent_seg_maps(
     green_map = np.zeros_like(seg_map).astype(np.uint8)
     blue_map = np.zeros_like(seg_map).astype(np.uint8)
     
-    print(class_values)
     for class_value in class_values: # starting from 1 as we do not want 0
         for label_num in range(0, len(label_colors_list)):
             if label_num == class_value:
