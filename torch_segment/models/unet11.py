@@ -1,3 +1,9 @@
+"""
+This UNet model has a pre-trained VGG11 as the enocder.
+
+Model architecture credit: https://github.com/ternaus/robot-surgery-segmentation/blob/master/models.py
+"""
+
 import torch
 import torchvision
 
